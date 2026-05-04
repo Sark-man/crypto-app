@@ -10,33 +10,35 @@ const cryptoRoutes = require('./routes/cryptoRoutes');
 
 const app = express();
 
-// ─── Middleware ────────────────────────────────────────────────────────────────
+// Middleware 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:5173',
+    origin:[ 
+      'https://sark-crypto-app.netlify.app',
+      'http://localhost:5173'],
     credentials: true,
   })
 );
 
-// ─── Routes ───────────────────────────────────────────────────────────────────
+//Routes 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/crypto', cryptoRoutes);
 
 // Health check
 app.get('/', (req, res) => {
-  res.json({ message: 'Coinbase Clone API is running 🚀' });
+  res.json({ message: "Sark's CryptoApp API is running" });
 });
 
-// ─── 404 Handler ──────────────────────────────────────────────────────────────
+// 404 Handler
 app.use((req, res) => {
   res.status(404).json({ success: false, message: 'Route not found' });
 });
 
-// ─── Global Error Handler ─────────────────────────────────────────────────────
+// Global Error Handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(err.statusCode || 500).json({
@@ -45,7 +47,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-// ─── Database + Server Start ──────────────────────────────────────────────────
+// Database + Server Start 
 const PORT = process.env.PORT || 5000;
 
 mongoose

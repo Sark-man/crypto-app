@@ -7,8 +7,6 @@ const {
   addCrypto,
 } = require('../controllers/cryptoController');
 
-// NOTE: Specific routes (/gainers, /new) MUST come before the root route
-// to prevent Express from treating "gainers" as a dynamic :id param.
 
 // GET /api/crypto/gainers  — top gainers by 24h % change
 router.get('/gainers', getTopGainers);

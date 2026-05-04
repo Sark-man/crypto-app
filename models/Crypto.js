@@ -36,7 +36,7 @@ const cryptoSchema = new mongoose.Schema(
   }
 );
 
-// ─── Index for fast sorting ────────────────────────────────────────────────────
+// Index for fast sorting 
 cryptoSchema.index({ change24h: -1 });
 cryptoSchema.index({ createdAt: -1 });
 
